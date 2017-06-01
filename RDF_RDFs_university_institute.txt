@@ -1,0 +1,42 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+@base <http://example.org/#> .
+
+:staff a rdfs:Class. 
+:professors a rdfs:Class;
+	rdfs:subClassOf :staff;
+	rdfs:label “Professor”. 
+:scientificstaff a rdfs:Class.
+	rdfs:subClassOf :staff; 
+	rdfs:label “Scientific Staff”.
+
+:disciplines a rdfs:Class. 
+	rdfs:label “Disciplines”.
+
+
+:seminars a rdfs:Class. 
+	rdfs:subClassOf : :disciplines;
+
+:publications a rdfs:Class. 
+rdfs:label “Publications”.
+
+:isManagedBy a rdf:Property ; 
+	rdfs:domain :disciplines ;
+	rdfs:range :professor; 	
+	rdfs:label "is managed by" .
+
+:publishedby a rdf:Property ; 
+	rdfs:domain :publications ;
+	rdfs:range :professor; 
+	rdfs:label “was published by”.
+
+:istaughtIn a rdf:Property; 
+	rdfs:domain :seminars ;
+	rdfs:range :disciplines; 
+	rdfs:label “is taught in”.
+
+:CommunicationKnowledgeMangement a :seminars. :InformationScience a :disciplines. :CommunicationKnowledgeMangement :istaughtIn :InformationScience
+
+:InformationScience a :InformationScience a :disciplines. 
+:MichaelSeadle a :professors.
+:InformationScience :isManagedBy :MichaelSeadle
